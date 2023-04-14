@@ -9,7 +9,11 @@
     "strict": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "rootDir": "./src",                                  /* Specify the root folder within your source files. */
+    "allowSyntheticDefaultImports": true,             /* Allow 'import x from y' when a module doesn't have a default export. */
+    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+    "skipLibCheck": true   
   },
   "exclude": ["node_modules"]
 }
