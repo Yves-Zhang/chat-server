@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { RoutingControllersOptions } from 'routing-controllers';
 
 function capitalizeFirstLetter(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -29,4 +30,10 @@ fs.readdirSync(controllerPath).forEach((file: string) => {
   }
 });
 
-export default Controllers
+export default function registerControllers(server: { (options?: RoutingControllersOptions | undefined): any; (arg0: { controllers: any[]; }): any; }, configs?: RoutingControllersOptions | undefined){
+  return server({
+    controllers: [...Controllers],
+    ...configs
+  });
+}
+
