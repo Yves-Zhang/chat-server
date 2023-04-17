@@ -1,7 +1,7 @@
 import { JsonController, Get } from "routing-controllers";
 
-@JsonController()
-export class LoginController {
+@JsonController('/login')
+export class Login {
   @Get("/")
   index() {
     return { message: "Hello, World!" };
