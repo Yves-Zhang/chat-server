@@ -32,6 +32,8 @@ export async function checkoutApiKey(chatKey: string, res: Response): Promise<an
     return wrapResponse(responseData); // 包装并返回
   } catch (error) {
     console.log(error)
+    // 清空用户cookie
+    res.clearCookie('chatkey');
     if (error instanceof AxiosError) {
       const { response } = error
       return wrapResponse({
