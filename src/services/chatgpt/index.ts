@@ -1,5 +1,4 @@
-// import * as dotenv from 'dotenv'
-import 'isomorphic-fetch'
+// // import * as dotenv from 'dotenv'
 import type { ChatGPTAPIOptions, ChatMessage, SendMessageOptions } from 'chatgpt'
 import { ChatGPTAPI } from 'chatgpt'
 import type { RequestOptions, ApiModel, ChatContext, ModelConfig } from './types'
@@ -22,10 +21,9 @@ const ErrorCodeMessage: Record<string, string> = {
 
 const timeoutMs: number = 30 * 1000
 
-function getApi() {
+async function getApi() {
   let apiModel: ApiModel
   let api: ChatGPTAPI
-
 
   const model = 'gpt-3.5-turbo'
   const OPENAI_API_BASE_URL = 'https://new-bility.com'
@@ -39,12 +37,13 @@ function getApi() {
     apiBaseUrl: `${OPENAI_API_BASE_URL}/v1`
   }
 
+  const { ChatGPTAPI } = await import('chatgpt')
   api = new ChatGPTAPI({ ...options })
-  return { apiModel, api }
+  return { apiModel, api: '' }
 }
 
 async function chatReplyProcess(options: RequestOptions) {
-  let { apiModel, api }: { apiModel: string | undefined; api: ChatGPTAPI } = getApi()
+  let { apiModel, api }: { apiModel: string | undefined; api: any } = await getApi()
   const { message, lastContext, process, systemMessage } = options
   try {
     let options: SendMessageOptions = { timeoutMs }
@@ -63,7 +62,7 @@ async function chatReplyProcess(options: RequestOptions) {
 
     const response = await api.sendMessage(message, {
       ...options,
-      onProgress: (partialResponse) => {
+      onProgress: (partialResponse: any) => {
         process?.(partialResponse)
       },
     })

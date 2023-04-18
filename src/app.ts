@@ -19,7 +19,6 @@ app.use(logger);
 // 请求次数限制
 app.use(limiter);
 
-
 // 配置静态资源目录
 app.use('/static', express.static(path.join(__dirname, 'public')));
 

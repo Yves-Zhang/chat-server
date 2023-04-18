@@ -1,6 +1,7 @@
 import { Response } from 'express'
 import type { ChatMessage } from './chatgpt'
 import { chatReplyProcess } from './chatgpt'
+import wrapResponse from '../utils/wrapResponse'
 
 interface Configs {
   prompt: string
@@ -13,7 +14,7 @@ export async function chatService(config: Configs, res: Response) {
   try {
     const { prompt, options = {}, systemMessage } = config
     let firstChunk = true
-    return await chatReplyProcess({
+    const chatRes = await chatReplyProcess({
       message: prompt,
       lastContext: options,
       process: (chat: ChatMessage) => {
@@ -22,8 +23,23 @@ export async function chatService(config: Configs, res: Response) {
       },
       systemMessage,
     })
+
+    console.log(chatRes, 111)
+
+    return wrapResponse({
+      code: 0,
+      data: 'success',
+      message: 'success',
+      success: true
+    });
   }
   catch (error) {
-    return JSON.stringify(error)
+    console.log(error, 222)
+    return wrapResponse({
+      code: 999,
+      data: 'null',
+      message: 'error',
+      success: false
+    });
   }
 }

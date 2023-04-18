@@ -1,8 +1,7 @@
-import { Middleware } from 'routing-controllers'
+import { ExpressMiddlewareInterface } from 'routing-controllers'
 import { Request, Response, NextFunction } from 'express'
 
-@Middleware({ type: 'before' })
-export class auth {
+export class auth implements ExpressMiddlewareInterface {
   use(req: Request, _: Response, next: NextFunction) {
     const chatkey = req.cookies.chatkey
     const AUTH_SECRET_KEY = chatkey
