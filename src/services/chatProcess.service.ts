@@ -1,5 +1,6 @@
-import { Request, Response } from 'express';
-import type { ChatMessage, chatReplyProcess } from './chatgpt'
+import { Response } from 'express'
+import type { ChatMessage } from './chatgpt'
+import { chatReplyProcess } from './chatgpt'
 
 interface Configs {
   prompt: string
