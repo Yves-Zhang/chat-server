@@ -6,6 +6,7 @@ import express from 'express'
 import path from 'path'
 import logger from './middleWares/logger'
 import { limiter } from './middleWares/limiter'
+import chalk from 'chalk'
 
 const { port } = config
 
@@ -23,5 +24,5 @@ app.use(limiter);
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.listen(port, () => {
-  console.log(`Server is running on port: http://localhost:${port}`)
+  console.log(chalk`{bold {gray Server is running on port:}} {bold {green http://localhost:${port}}}`)
 });
