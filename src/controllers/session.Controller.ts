@@ -5,7 +5,7 @@ export class Session {
   @Post('/')
   index() {
     return {
-      model: 'ChatGPTAPI'
+      status: 'Success'
     };
   }
 }
