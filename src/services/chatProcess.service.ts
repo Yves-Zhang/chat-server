@@ -24,8 +24,6 @@ export async function chatService(config: Configs, res: Response) {
       systemMessage,
     })
 
-    console.log(chatRes, 111)
-
     return wrapResponse({
       code: 0,
       data: 'success',
@@ -34,7 +32,6 @@ export async function chatService(config: Configs, res: Response) {
     });
   }
   catch (error) {
-    console.log(error, 222)
     return wrapResponse({
       code: 999,
       data: 'null',
